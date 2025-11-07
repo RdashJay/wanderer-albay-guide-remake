@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { NotificationBell } from "@/components/NotificationBell";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -158,6 +159,9 @@ const Navbar = () => {
             Emergency
           </Link>
 
+          {/* === NOTIFICATION BELL === */}
+          {session && <NotificationBell />}
+          
           {/* === THEME TOGGLE === */}
           <ThemeToggle />
 

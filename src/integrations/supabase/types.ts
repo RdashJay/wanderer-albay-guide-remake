@@ -71,10 +71,32 @@ export type Database = {
         }
         Relationships: []
       }
+      categories: {
+        Row: {
+          created_at: string | null
+          icon: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           created_at: string
           description: string | null
+          district: string | null
           event_date: string | null
           event_type: string | null
           id: string
@@ -86,6 +108,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
+          district?: string | null
           event_date?: string | null
           event_type?: string | null
           id?: string
@@ -97,6 +120,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
+          district?: string | null
           event_date?: string | null
           event_type?: string | null
           id?: string
@@ -163,6 +187,41 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          event_id: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_id?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_id?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -264,6 +323,38 @@ export type Database = {
             columns: ["spot_id"]
             isOneToOne: false
             referencedRelation: "tourist_spots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subcategories: {
+        Row: {
+          category_id: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subcategories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
             referencedColumns: ["id"]
           },
         ]

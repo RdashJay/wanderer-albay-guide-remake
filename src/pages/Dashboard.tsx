@@ -11,7 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { MapPin, Trash2, Calendar, Sparkles, Edit, RefreshCw } from "lucide-react";
-import OnboardingModal from "@/components/OnboardingModal";
+import { OnboardingModal } from "@/components/OnboardingModal";
 import RecommendedSpots from "@/components/RecommendedSpots";
 import EventNotifications from "@/components/EventNotifications";
 import NearbyRestaurants from "@/components/NearbyRestaurants";

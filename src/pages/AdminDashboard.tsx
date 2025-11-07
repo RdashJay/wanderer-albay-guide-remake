@@ -9,6 +9,7 @@ import ManageSpots from "@/components/admin/ManageSpots";
 import ManageRestaurants from "@/components/admin/ManageRestaurants";
 import ManageEvents from "@/components/admin/ManageEvents";
 import ManageAccommodations from "@/components/admin/ManageAccommodations";
+import { ManageCategories } from "@/components/admin/ManageCategories";
 import UserManagement from "@/components/admin/UserManagement";
 import Analytics from "@/components/admin/Analytics";
 import ReviewManagement from "@/components/admin/ReviewManagement";
@@ -95,11 +96,12 @@ const AdminDashboard = () => {
           </div>
 
           <Tabs defaultValue="spots" className="w-full">
-            <TabsList className="grid w-full grid-cols-7 mb-8">
-              <TabsTrigger value="spots">Tourist Spots</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-8 mb-8">
+              <TabsTrigger value="spots">Spots</TabsTrigger>
               <TabsTrigger value="accommodations">Accommodations</TabsTrigger>
               <TabsTrigger value="restaurants">Restaurants</TabsTrigger>
               <TabsTrigger value="events">Events</TabsTrigger>
+              <TabsTrigger value="categories">Categories</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -117,13 +119,17 @@ const AdminDashboard = () => {
               <ManageRestaurants />
             </TabsContent>
 
-            <TabsContent value="events">
-              <ManageEvents />
-            </TabsContent>
+          <TabsContent value="events">
+            <ManageEvents />
+          </TabsContent>
 
-            <TabsContent value="users">
-              <UserManagement />
-            </TabsContent>
+          <TabsContent value="categories">
+            <ManageCategories />
+          </TabsContent>
+
+          <TabsContent value="users">
+            <UserManagement />
+          </TabsContent>
 
             <TabsContent value="reviews">
               <ReviewManagement />
