@@ -35,8 +35,14 @@ interface Barangay {
   name: string;
 }
 
-const CATEGORY_OPTIONS = ["Luxury", "Beach Resort", "All-Inclusive", "Budget", "Hostel"];
-const AMENITIES_OPTIONS = ["WiFi", "Pool", "Restaurant", "Spa", "Parking", "Gym"];
+const CATEGORY_OPTIONS = ["Luxury","Mid-range", "Budget",  
+                          "Resort", "Hotel", "Hostel","Beach Resort", "All-Inclusive", 
+];
+const AMENITIES_OPTIONS = ["WiFi", "Pool", "Airconditioning", "Room Service", "Parking", "Gym",
+                          "Lounges", "Conference Room", "Massage", "Restaurant", "Well Program",
+                          "Function Hall", "Bar"
+                          
+];
 
 const ManageAccommodations = () => {
   const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
@@ -408,7 +414,7 @@ const ManageAccommodations = () => {
     if (value.indexOf('+') > 0) {
       return;
     }
-    if (value.length > 12) {
+    if (value.length > 13) {
       return;
     }
 
