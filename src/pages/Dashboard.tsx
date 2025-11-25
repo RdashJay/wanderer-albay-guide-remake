@@ -276,20 +276,9 @@ const Dashboard = () => {
                 </p>
                 <div className="space-y-2">
                   {itinerary.spots.slice(0, 3).map((spot: any, idx: number) => (
-                    <div 
-                      key={idx} 
-                      className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (spot.latitude && spot.longitude) {
-                          navigate(`/map?lat=${spot.latitude}&lng=${spot.longitude}&name=${encodeURIComponent(spot.name)}`);
-                        } else {
-                          toast.error("Location coordinates not available");
-                        }
-                      }}
-                    >
+                    <div key={idx} className="flex items-center gap-2 text-sm">
                       <MapPin className="w-4 h-4 text-primary" />
-                      <span className="hover:underline">{spot.name}</span>
+                      <span>{spot.name}</span>
                     </div>
                   ))}
                   {itinerary.spots.length > 3 && (
@@ -326,40 +315,20 @@ const Dashboard = () => {
                 itinerary.spots.map((spot: any, idx: number) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 border-b pb-3 cursor-pointer hover:bg-accent/50 p-2 rounded-lg transition-colors"
-                    onClick={() => {
-                      if (spot.latitude && spot.longitude) {
-                        navigate(`/map?lat=${spot.latitude}&lng=${spot.longitude}&name=${encodeURIComponent(spot.name)}`);
-                      } else {
-                        toast.error("Location coordinates not available for this spot");
-                      }
-                    }}
+                    className="flex items-start gap-3 border-b pb-3"
                   >
                     <MapPin className="w-5 h-5 mt-1 text-primary" />
-                    <div className="flex-1">
+                    <div>
                       <p className="font-medium">{spot.name}</p>
                       {spot.description && (
                         <p className="text-sm text-muted-foreground">
                           {spot.description}
                         </p>
                       )}
-                      {spot.location && (
+                      {spot.address && (
                         <p className="text-xs text-muted-foreground italic">
-                          📍 {spot.location}
+                          {spot.address}
                         </p>
-                      )}
-                      {spot.latitude && spot.longitude && (
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          className="mt-2 text-primary hover:text-primary"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigate(`/map?lat=${spot.latitude}&lng=${spot.longitude}&name=${encodeURIComponent(spot.name)}`);
-                          }}
-                        >
-                          🗺️ View Route
-                        </Button>
                       )}
                     </div>
                   </div>

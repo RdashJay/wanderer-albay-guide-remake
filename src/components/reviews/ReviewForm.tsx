@@ -6,33 +6,35 @@ import { useToast } from "@/hooks/use-toast";
 import { Star } from "lucide-react";
 
 interface ReviewFormProps {
-  spotId: string;
+  spotId: string; // we reuse spot_id column
   userId: string;
   onReviewSubmitted: () => void;
   hasUserReviewed: boolean;
 }
 
-export const ReviewForm = ({ spotId, userId, onReviewSubmitted, hasUserReviewed }: ReviewFormProps) => {
-  const [rating, setRating] = useState(0);
-  const [hoveredRating, setHoveredRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export const ReviewForm = ({
+  spotId,
+  userId,
+  onReviewSubmitted,
+  hasUserReviewed,
+}: ReviewFormProps) => {
+  const [rating, setRating] = useState<number>(0);
+  const [hoveredRating, setHoveredRating] = useState<number>(0);
+  const [comment, setComment] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (rating === 0) {
-      toast({
-        title: "Error",
-        description: "Please select a rating",
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: "Please select a rating", variant: "destructive" });
       return;
     }
 
     setIsSubmitting(true);
 
+    // Use `spot_id` even for accommodations
     const { error } = await supabase.from("reviews").insert({
       spot_id: spotId,
       user_id: userId,
@@ -41,16 +43,9 @@ export const ReviewForm = ({ spotId, userId, onReviewSubmitted, hasUserReviewed 
     });
 
     if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to submit review",
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: "Failed to submit review", variant: "destructive" });
     } else {
-      toast({
-        title: "Success",
-        description: "Review submitted successfully",
-      });
+      toast({ title: "Success", description: "Review submitted successfully" });
       setRating(0);
       setComment("");
       onReviewSubmitted();
@@ -58,8 +53,6 @@ export const ReviewForm = ({ spotId, userId, onReviewSubmitted, hasUserReviewed 
 
     setIsSubmitting(false);
   };
-  
-
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -96,22 +89,16 @@ export const ReviewForm = ({ spotId, userId, onReviewSubmitted, hasUserReviewed 
           rows={4}
           maxLength={500}
         />
-        <p className="text-xs text-muted-foreground mt-1">
-          {comment.length}/500 characters
-        </p>
+        <p className="text-xs text-muted-foreground mt-1">{comment.length}/500 characters</p>
       </div>
 
-      <Button
-  type="submit"
-  disabled={isSubmitting || rating === 0 || hasUserReviewed}
->
-  {hasUserReviewed
-    ? "Already Reviewed"
-    : isSubmitting
-    ? "Submitting..."
-    : "Submit Review"}
-</Button>
-
+      <Button type="submit" disabled={isSubmitting || rating === 0 || hasUserReviewed}>
+        {hasUserReviewed
+          ? "Already Reviewed"
+          : isSubmitting
+          ? "Submitting..."
+          : "Submit Review"}
+      </Button>
     </form>
   );
 };
