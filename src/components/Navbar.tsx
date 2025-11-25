@@ -12,6 +12,7 @@ import {
   Shield,
   Cloud,
   PhoneCall,
+  Calendar,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
@@ -158,6 +159,14 @@ const Navbar = () => {
             <PhoneCall className="w-4 h-4" />
             Emergency
           </Link>
+
+          <Link
+          to="/Events"
+          className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1"
+        >
+          <Calendar className="w-4 h-4" /> 
+          Festivals
+        </Link>
 
           {/* === NOTIFICATION BELL === */}
           {session && <NotificationBell />}

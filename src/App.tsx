@@ -17,6 +17,10 @@ import EmergencyHotlines from "./pages/EmergencyHotlinePage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import EmailVerification from "./pages/EmailVerification";
+import AccommodationDetail from "./pages/AccomodationDetail";
+import RestaurantDetail from "./pages/RestaurantDetail";
+import EventPage from "./pages/EventPage";
+import EventPageDetail from "./pages/EventPageDetail";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +44,10 @@ const App = () => (
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/emergency-hotlines" element={<EmergencyHotlines />} />
+            <Route path="/accommodation/:id" element={<AccommodationDetail />} />
+            <Route path="/restaurant/:id" element={<RestaurantDetail />} />
+            <Route path="/events" element={<EventPage />} />
+            <Route path="/events/:id" element={<EventPageDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
